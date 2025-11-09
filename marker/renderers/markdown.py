@@ -117,105 +117,136 @@ class Markdownify(MarkdownConverter):
                 + " "
             )
 
-    def convert_table(self, el, text, parent_tags):
-        if self.html_tables_in_markdown:
-            return "\n\n" + str(el) + "\n\n"
+def get_formatted_table_text(element):
+    text = []
+    for content in element.contents:
+        if content is None:
+            continue
 
-        total_rows = len(el.find_all("tr"))
-        colspans = []
-        rowspan_cols = defaultdict(int)
-        for i, row in enumerate(el.find_all("tr")):
-            row_cols = rowspan_cols[i]
-            for cell in row.find_all(["td", "th"]):
-                colspan = int(cell.get("colspan", 1))
-                row_cols += colspan
-                for r in range(int(cell.get("rowspan", 1)) - 1):
-                    rowspan_cols[i + r] += (
-                        colspan  # Add the colspan to the next rows, so they get the correct number of columns
-                    )
-            colspans.append(row_cols)
-        total_cols = max(colspans) if colspans else 0
+        if isinstance(content, NavigableString):
+            stripped = content.strip()
+            if stripped:
+                text.append(escape_dollars(stripped))
+        elif content.name == "br":
+            text.append("<br>")
+        elif content.name == "math":
+            text.append("$" + content.text + "$")
+        else:
+            content_str = escape_dollars(str(content))
+            text.append(content_str)
 
-        grid = [[None for _ in range(total_cols)] for _ in range(total_rows)]
+    # Bouw tekst waarbij <br> een scheiding naar een nieuwe regel markeert
+    lines = []
+    current_line = ""
+    for t in text:
+        if t == "<br>":
+            if current_line:
+                lines.append(current_line.strip())
+            current_line = ""
+        else:
+            if current_line:
+                current_line += " " + t
+            else:
+                current_line = t
+    if current_line:
+        lines.append(current_line.strip())
 
-        for row_idx, tr in enumerate(el.find_all("tr")):
-            col_idx = 0
-            for cell in tr.find_all(["td", "th"]):
-                # Skip filled positions
-                while col_idx < total_cols and grid[row_idx][col_idx] is not None:
-                    col_idx += 1
+    return "\n".join(lines)
 
-                # Fill in grid
-                value = (
-                    get_formatted_table_text(cell)
-                    .replace("\n", " ")
-                    .replace("|", " ")
-                    .strip()
-                )
-                rowspan = int(cell.get("rowspan", 1))
-                colspan = int(cell.get("colspan", 1))
 
-                if col_idx >= total_cols:
-                    # Skip this cell if we're out of bounds
-                    continue
+def convert_table(self, el, text, parent_tags):
+    if self.html_tables_in_markdown:
+        return "\n\n" + str(el) + "\n\n"
 
-                for r in range(rowspan):
-                    for c in range(colspan):
-                        try:
-                            if r == 0 and c == 0:
-                                grid[row_idx][col_idx] = value
-                            else:
-                                grid[row_idx + r][col_idx + c] = (
-                                    ""  # Empty cell due to rowspan/colspan
-                                )
-                        except IndexError:
-                            # Sometimes the colspan/rowspan predictions can overflow
-                            logger.info(
-                                f"Overflow in columns: {col_idx + c} >= {total_cols} or rows: {row_idx + r} >= {total_rows}"
-                            )
-                            continue
+    total_rows = len(el.find_all("tr"))
+    colspans = []
+    rowspan_cols = defaultdict(int)
+    for i, row in enumerate(el.find_all("tr")):
+        row_cols = rowspan_cols[i]
+        for cell in row.find_all(["td", "th"]):
+            colspan = int(cell.get("colspan", 1))
+            row_cols += colspan
+            for r in range(int(cell.get("rowspan", 1)) - 1):
+                rowspan_cols[i + r + 1] += colspan  # Add colspan to subsequent rows
+        colspans.append(row_cols)
+    total_cols = max(colspans) if colspans else 0
 
-                col_idx += colspan
+    grid = [[None for _ in range(total_cols)] for _ in range(total_rows)]
 
-        markdown_lines = []
-        col_widths = [0] * total_cols
-        for row in grid:
-            for col_idx, cell in enumerate(row):
-                if cell is not None:
-                    col_widths[col_idx] = max(col_widths[col_idx], len(str(cell)))
+    for row_idx, tr in enumerate(el.find_all("tr")):
+        col_idx = 0
+        for cell in tr.find_all(["td", "th"]):
+            # Skip filled positions
+            while col_idx < total_cols and grid[row_idx][col_idx] is not None:
+                col_idx += 1
 
-        def add_header_line():
-            markdown_lines.append(
-                "|" + "|".join("-" * (width + 2) for width in col_widths) + "|"
+            # Fill in grid
+            value = (
+                get_formatted_table_text(cell)
+                .replace("|", " ")  # Preserve \n as line breaks for markdown
+                .strip()
             )
+            rowspan = int(cell.get("rowspan", 1))
+            colspan = int(cell.get("colspan", 1))
 
-        # Generate markdown rows
-        added_header = False
-        for i, row in enumerate(grid):
-            is_empty_line = all(not cell for cell in row)
-            if is_empty_line and not added_header:
-                # Skip leading blank lines
+            if col_idx >= total_cols:
                 continue
 
-            line = []
-            for col_idx, cell in enumerate(row):
-                if cell is None:
-                    cell = ""
-                padding = col_widths[col_idx] - len(str(cell))
-                line.append(f" {cell}{' ' * padding} ")
-            markdown_lines.append("|" + "|".join(line) + "|")
+            for r in range(rowspan):
+                for c in range(colspan):
+                    try:
+                        if r == 0 and c == 0:
+                            grid[row_idx + r][col_idx + c] = value
+                        else:
+                            grid[row_idx + r][col_idx + c] = ""  # occupied by rowspan/colspan
+                    except IndexError:
+                        logger.info(
+                            f"Overflow in columns: {col_idx + c} >= {total_cols} or rows: {row_idx + r} >= {total_rows}"
+                        )
+                        continue
 
-            if not added_header:
-                # Skip empty lines when adding the header row
-                add_header_line()
-                added_header = True
+            col_idx += colspan
 
-        # Handle one row tables
-        if total_rows == 1:
+    markdown_lines = []
+    col_widths = [0] * total_cols
+    for row in grid:
+        for col_idx, cell in enumerate(row):
+            if cell is not None:
+                max_line_length = max(len(line) for line in cell.split("\n"))
+                col_widths[col_idx] = max(col_widths[col_idx], max_line_length)
+
+    def add_header_line():
+        markdown_lines.append(
+            "|" + "|".join("-" * (width + 2) for width in col_widths) + "|"
+        )
+
+    added_header = False
+    for i, row in enumerate(grid):
+        is_empty_line = all(not cell for cell in row)
+        if is_empty_line and not added_header:
+            continue  # skip leading empty lines
+
+        line = []
+        for col_idx, cell in enumerate(row):
+            if cell is None:
+                cell = ""
+            # Maak markdown line breaks in cell-tekst zichtbaar met 2 spaties + newline
+            cell_md = cell.replace("\n", "  \n")
+            # Padding gebaseerd op langste regel in cell
+            padding = col_widths[col_idx] - max(len(line) for line in cell.split("\n"))
+            line.append(f" {cell_md}{' ' * padding} ")
+        markdown_lines.append("|" + "|".join(line) + "|")
+
+        if not added_header:
             add_header_line()
+            added_header = True
 
-        table_md = "\n".join(markdown_lines)
-        return "\n\n" + table_md + "\n\n"
+    if total_rows == 1 and not added_header:
+        add_header_line()
+
+    table_md = "\n".join(markdown_lines)
+    return "\n\n" + table_md + "\n\n"
+
 
     def convert_a(self, el, text, parent_tags):
         text = self.escape(text)

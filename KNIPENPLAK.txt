@@ -1,0 +1,294 @@
+  --OllamaService_timeout INTEGER
+                                  The timeout to use for the service. Default
+                                  is 30.
+  --OllamaService_max_retries INTEGER
+                                  The maximum number of retries to use for the
+                                  service. Default is 2.
+  --OllamaService_retry_wait_time INTEGER
+                                  The wait time between retries. Default is 3.
+  --OllamaService_max_output_tokens INTEGER
+                                  The maximum number of output tokens to
+                                  generate. Default is None.
+  --OllamaService_ollama_base_url TEXT
+                                  The base url to use for ollama. No trailing
+                                  slash. Default is http://localhost:11434.
+  --OllamaService_ollama_model TEXT
+                                  The model name to use for ollama. Default is
+                                  llama3.2-vision.
+
+
+  --MarkdownRenderer_extract_images BOOLEAN
+                                  Extract images from the document. Default is
+                                  True.
+  --MarkdownRenderer_keep_pageheader_in_output
+                                  Keep the page header in the output HTML.
+                                  Default is False.
+  --MarkdownRenderer_keep_pagefooter_in_output
+                                  Keep the page footer in the output HTML.
+                                  Default is False.
+  --MarkdownRenderer_add_block_ids
+                                  Whether to add block IDs to the output HTML.
+                                  Default is False.
+  --MarkdownRenderer_paginate_output
+                                  Whether to paginate the output. Default is
+                                  False.
+  --MarkdownRenderer_page_separator TEXT
+                                  The separator to use between pages. Default
+                                  is '-' * 48.
+  --MarkdownRenderer_html_tables_in_markdown
+                                  Return tables formatted as HTML, instead of
+                                  in markdown Default is False.
+
+
+                                  extraction. Default is None.
+  --PdfConverter_use_llm          Enable higher quality processing with LLMs.
+                                  Default is False.
+  --OCRConverter_use_llm          Enable higher quality processing with LLMs.
+                                  Default is False.
+  --TableConverter_use_llm        Enable higher quality processing with LLMs.
+                                  Default is False.
+
+
+
+  --LLMComplexRegionProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+                                  make to the Gemini model. Default is 3.
+  --LLMComplexRegionProcessor_image_expansion_ratio FLOAT
+                                  The ratio to expand the image by when
+                                  cropping. Default is 0.01.
+  --LLMComplexRegionProcessor_use_llm
+                                  Whether to use the LLM model. Default is
+                                  False.
+  --LLMComplexRegionProcessor_disable_tqdm
+                                  Whether to disable the tqdm progress bar.
+                                  Default is False.
+  --LLMEquationProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+                                  make to the Gemini model. Default is 3.
+  --LLMEquationProcessor_image_expansion_ratio FLOAT
+                                  The ratio to expand the image by when
+                                  cropping. Default is 0.05.
+  --LLMEquationProcessor_use_llm  Whether to use the LLM model. Default is
+                                  False.
+  --LLMEquationProcessor_disable_tqdm
+                                  Whether to disable the tqdm progress bar.
+                                  Default is False.
+  --LLMEquationProcessor_min_equation_height FLOAT
+                                  The minimum ratio between equation height
+                                  and page height to consider for processing.
+                                  Default is 0.06. 
+  --LLMEquationProcessor_redo_inline_math
+                                  Whether to redo inline math blocks. Default
+                                  is False.
+  --LLMEquationProcessor_equation_latex_prompt TEXT
+                                  The prompt to use for generating LaTeX from
+                                  equations. Default is a string containing
+                                  the Gemini prompt.
+  --LLMFormProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+                                  make to the Gemini model. Default is 3.
+  --LLMFormProcessor_image_expansion_ratio FLOAT
+                                  The ratio to expand the image by when
+                                  cropping. Default is 0.01.
+  --LLMFormProcessor_use_llm      Whether to use the LLM model. Default is
+                                  False.
+  --LLMFormProcessor_disable_tqdm
+                                  Whether to disable the tqdm progress bar.
+                                  Default is False.
+  --LLMHandwritingProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+                                  make to the Gemini model. Default is 3.
+  --LLMHandwritingProcessor_image_expansion_ratio FLOAT
+                                  The ratio to expand the image by when
+                                  cropping. Default is 0.01.
+  --LLMHandwritingProcessor_use_llm
+                                  Whether to use the LLM model. Default is
+                                  False.
+  --LLMHandwritingProcessor_disable_tqdm
+                                  Whether to disable the tqdm progress bar.
+                                  Default is False.
+  --LLMHandwritingProcessor_handwriting_generation_prompt TEXT
+                                  The prompt to use for OCRing handwriting.
+                                  Default is a string containing the Gemini
+                                  prompt.
+  --LLMImageDescriptionProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+                                  make to the Gemini model. Default is 3.
+  --LLMImageDescriptionProcessor_image_expansion_ratio FLOAT
+                                  The ratio to expand the image by when
+                                  cropping. Default is 0.01.
+  --LLMImageDescriptionProcessor_use_llm
+                                  Whether to use the LLM model. Default is
+                                  False.
+  --LLMImageDescriptionProcessor_disable_tqdm
+                                  Whether to disable the tqdm progress bar.
+                                  Default is False.
+  - _extract_images BOOLEAN
+                                  Extract images from the document. Default is
+                                  True.
+  --LLMImageDescriptionProcessor_image_description_prompt TEXT
+                                  The prompt to use for generating image
+                                  descriptions. Default is a string containing
+                                  the Gemini prompt.
+  --LLMMathBlockProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+                                  make to the Gemini model. Default is 3.
+  --LLMMathBlockProcessor_image_expansion_ratio FLOAT
+                                  The ratio to expand the image by when
+                                  cropping. Default is 0.01.
+  --LLMMathBlockProcessor_use_llm
+                                  Whether to use the LLM model. Default is
+                                  False.
+  --LLMMathBlockProcessor_disable_tqdm
+                                  Whether to disable the tqdm progress bar.
+                                  Default is False.
+  --LLMMathBlockProcessor_redo_inline_math
+                                  If True, the inline math will be re-done,
+                                  otherwise it will be left as is. Default is
+                                  False.
+  --LLMMathBlockProcessor_inlinemath_min_ratio FLOAT
+                                  If more than this ratio of blocks are
+                                  inlinemath blocks, assume everything has
+                                  math. Default is 0.4.
+  --LLMSimpleBlockMetaProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+                                  make to the Gemini model. Default is 3.
+  --LLMSimpleBlockMetaProcessor_image_expansion_ratio FLOAT
+                                  The ratio to expand the image by when
+                                  cropping. Default is 0.01.
+  --LLMSimpleBlockMetaProcessor_use_llm
+                                  Whether to use the LLM model. Default is
+                                  False.
+  --LLMSimpleBlockMetaProcessor_disable_tqdm
+                                  Whether to disable the tqdm progress bar.
+                                  Default is False.
+  --LLMPageCorrectionProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+                                  make to the Gemini model. Default is 3.
+  --LLMPageCorrectionProcessor_image_expansion_ratio FLOAT
+                                  The ratio to expand the image by when
+                                  cropping. Default is 0.01.
+  --LLMPageCorrectionProcessor_use_llm
+                                  Whether to use the LLM model. Default is
+                                  False.
+  --LLMPageCorrectionProcessor_disable_tqdm
+                                  Whether to disable the tqdm progress bar.
+                                  Default is False.
+  --LLMPageCorrectionProcessor_block_correction_prompt TEXT
+                                  The user prompt to guide the block
+                                  correction process. Default is None.
+  --LLMSectionHeaderProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+                                  make to the Gemini model. Default is 3.
+  --LLMSectionHeaderProcessor_image_expansion_ratio FLOAT
+                                  The ratio to expand the image by when
+                                  cropping. Default is 0.01.
+  --LLMSectionHeaderProcessor_use_llm
+                                  Whether to use the LLM model. Default is
+                                  False.
+  --LLMSectionHeaderProcessor_disable_tqdm
+                                  Whether to disable the tqdm progress bar.
+                                  Default is False.
+  --LLMTableProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+                                  make to the Gemini model. Default is 3.
+  --LLMTableProcessor_image_expansion_ratio FLOAT
+                                  The ratio to expand the image by when
+                                  cropping. Default is 0.01.
+  --LLMTableProcessor_use_llm     Whether to use the LLM model. Default is
+                                  False.
+  --LLMTableProcessor_disable_tqdm
+                                  Whether to disable the tqdm progress bar.
+                                  Default is False.
+  --LLMTableProcessor_max_rows_per_batch INTEGER
+                                  If the table has more rows than this, chunk
+                                  the table. (LLMs can be inaccurate with a
+                                  lot of rows) Default is 60.
+  --LLMTableProcessor_max_table_rows INTEGER
+                                  The maximum number of rows in a table to
+                                  process with the LLM processor.  Beyond this
+                                  will be skipped. Default is 175.
+  --LLMTableProcessor_table_image_expansion_ratio FLOAT
+                                  The ratio to expand the image by when
+                                  cropping. Default is 0.
+  --LLMTableProcessor_rotation_max_wh_ratio FLOAT
+                                  The maximum width/height ratio for table
+                                  cells for a table to be considered rotated.
+                                  Default is 0.6.
+  --LLMTableProcessor_max_table_iterations INTEGER
+                                  The maximum number of iterations to attempt
+                                  rewriting a table. Default is 2.
+  --LLMTableProcessor_table_rewriting_prompt TEXT
+                                  The prompt to use for rewriting text.
+                                  Default is a string containing the Gemini
+                                  rewriting prompt.
+  --LLMTableMergeProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+                                  make to the Gemini model. Default is 3.
+  --LLMTableMergeProcessor_image_expansion_ratio FLOAT
+                                  The ratio to expand the image by when
+                                  cropping. Default is 0.01.
+  --LLMTableMergeProcessor_use_llm
+                                  Whether to use the LLM model. Default is
+                                  False.
+  --LLMTableMergeProcessor_disable_tqdm
+                                  Whether to disable the tqdm progress bar.
+                                  Default is False.
+  --LLMTableMergeProcessor_table_height_threshold FLOAT
+                                  The minimum height ratio relative to the
+                                  page for the first table in a pair to be
+                                  considered for merging. Default is 0.6.
+  --LLMTableMergeProcessor_table_start_threshold FLOAT
+                                  The maximum percentage down the page the
+                                  second table can start to be considered for
+                                  merging. Default is 0.2.
+  --LLMTableMergeProcessor_vertical_table_height_threshold FLOAT
+                                  The height tolerance for 2 adjacent tables
+                                  to be merged into one. Default is 0.25.
+  --LLMTableMergeProcessor_vertical_table_distance_threshold INTEGER
+                                  The maximum distance between table edges for
+                                  adjacency. Default is 20.
+  --LLMTableMergeProcessor_horizontal_table_width_threshold FLOAT
+                                  The width tolerance for 2 adjacent tables to
+                                  be merged into one. Default is 0.25.
+  --LLMTableMergeProcessor_horizontal_table_distance_threshold INTEGER
+                                  The maximum distance between table edges for
+                                  adjacency. Default is 10.
+  --LLMTableMergeProcessor_column_gap_threshold INTEGER
+                                  The maximum gap between columns to merge
+                                  tables Default is 50.
+  --LLMTableMergeProcessor_no_merge_tables_across_pages
+                                  Whether to disable merging tables across
+                                  pages and keep page delimiters. Default is
+                                  False.
+  --LLMTableMergeProcessor_table_merge_prompt TEXT
+                                  The prompt to use for rewriting text.
+                                  Default is a string containing the Gemini
+                                  rewriting prompt.
+
+
+
+                                  Default is None. (Applies to:
+                                  GoogleGeminiService)
+  --ollama_base_url TEXT          The base url to use for ollama. No trailing
+                                  slash. Default is http://localhost:11434.
+                                  (Applies to: OllamaService)
+  --ollama_model TEXT             The model name to use for ollama. Default is
+                                  llama3.2-vision. (Applies to: OllamaService)
+
+  --pdftext_workers INTEGER       The number of workers to use for pdftext.
+                                  Default is 1. (Applies to: TableProcessor,
+                                  DocumentProvider, PdfProvider, EpubProvider,
+                                  HTMLProvider, PowerPointProvider,
+                                  SpreadSheetProvider)
+
+
+
+uv run marker_single --llm_service=marker.services.ollama.OllamaService --ollama_base_url http://192.168.50.30:11434 --use_llm  --disable_image_extraction "C:\Users\Gebruiker\Downloads\_OceanofPDF.com_Exam_Ref_Ms-700_Managing_Microsoft_Teams_-_Ed_Fisher.pdf"
+
+uv run marker_single --llm_service=marker.services.ollama.OllamaService --ollama_base_url http://192.168.50.30:11434 --use_llm  --ollama_model=hf.co/mlabonne/gemma-3-27b-it-abliterated-GGUF:Q8_0 --PdfConverter_use_llm --OCRConverter_use_llm --LLMPageCorrectionProcessor_use_llm --disable_image_extraction "C:\Users\Gebruiker\Downloads\_OceanofPDF.com_Exam_Ref_Ms-700_Managing_Microsoft_Teams_-_Ed_Fisher.pdf"
+
+
+uv run marker_single --llm_service=marker.services.ollama.OllamaService --ollama_base_url http://192.168.50.30:11434 --use_llm  --ollama_model=hf.co/mlabonne/gemma-3-27b-it-abliterated-GGUF:Q8_0 --PdfConverter_use_llm --OCRConverter_use_llm --LLMPageCorrectionProcessor_use_llm --disable_image_extraction "C:\Users\Gebruiker\Downloads\_OceanofPDF.com_Exam_Ref_Ms-700_Managing_Microsoft_Teams_-_Ed_Fisher.pdf" --LLMSimpleBlockMetaProcessor_use_llm --LLMPageCorrectionProcessor_use_llm --ExtractionConverter_use_llm --PdfConverter_use_llm  --OCRConverter_use_llm    --LineMergeProcessor_use_llm --LLMComplexRegionProcessor_use_llm
+
+

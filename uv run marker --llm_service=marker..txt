@@ -1,0 +1,104 @@
+uv run marker --llm_service=marker.services.ollama.OllamaService --ollama_base_url http://192.168.50.30:11434 --use_llm  --ollama_model=hf.co/mlabonne/gemma-3-27b-it-abliterated-GGUF:Q8_0 --PdfConverter_use_llm --OCRConverter_use_llm --LLMPageCorrectionProcessor_use_llm --disable_image_extraction --LLMSimpleBlockMetaProcessor_use_llm --LLMPageCorrectionProcessor_use_llm --ExtractionConverter_use_llm --PdfConverter_use_llm  --OCRConverter_use_llm    --LineMergeProcessor_use_llm --LLMComplexRegionProcessor_use_llm "c:\ebook"    
+
+
+uv run marker_single --llm_service=marker.services.ollama.OllamaService --ollama_base_url http://192.168.50.30:11434 --use_llm  --ollama_model=hf.co/mlabonne/gemma-3-27b-it-abliterated-GGUF:Q8_0 --PdfConverter_use_llm --OCRConverter_use_llm --LLMPageCorrectionProcessor_use_llm --disable_image_extraction "C:\Users\Gebruiker\Downloads\_OceanofPDF.com_Exam_Ref_Ms-700_Managing_Microsoft_Teams_-_Ed_Fisher.pdf" --LLMSimpleBlockMetaProcessor_use_llm --LLMPageCorrectionProcessor_use_llm --ExtractionConverter_use_llm --PdfConverter_use_llm  --OCRConverter_use_llm    --LineMergeProcessor_use_llm --LLMComplexRegionProcessor_use_llm
+
+
+--max_concurrency 
+--model_max_length
+--max_output_tokens 
+  --LLMComplexRegionProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+  --LLMEquationProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+  --LLMFormProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+  --LLMHandwritingProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+  --LLMImageDescriptionProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+  --LLMMathBlockProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+  --LLMSimpleBlockMetaProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+  --LLMPageCorrectionProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+  --LLMSectionHeaderProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+  --LLMTableProcessor_max_concurrency INTEGER
+                                  The maximum number of concurrent requests to
+
+  --TableConverter_use_llm   --LLMTableMergeProcessor_use_llm  --LLMPageCorrectionProcessor_use_llm
+ --timeout INTEGER               The timeout to use for the service. Default
+                                  is 30. (Applies to: AzureOpenAIService,
+                                  ClaudeService, GoogleGeminiService,
+                                  OllamaService, OpenAIService,
+                                  GoogleVertexService)
+  --max_retries INTEGER           The maximum number of retries to use for the
+                                  service. Default is 2. (Applies to:
+                                  AzureOpenAIService, ClaudeService,
+                                  GoogleGeminiService, OllamaService,
+                                  OpenAIService, GoogleVertexService)
+  --retry_wait_time INTEGER       The wait time between retries. Default is 3.
+                                  (Applies to: AzureOpenAIService,
+                                  ClaudeService, GoogleGeminiService,
+                                  OllamaService, OpenAIService,
+                                  GoogleVertexService)
+--pdftext_workers INTEGER       The number of workers to use for pdftext.
+                                  Default is 1. (Applies to: TableProcessor,
+                                  DocumentProvider, PdfProvider, EpubProvider,
+                                  HTMLProvider, PowerPointProvider,
+                                  SpreadSheetProvider)
+
+  --disable_multiprocessing       Disable multiprocessing.
+  --pdftext_workers INTEGER       The number of workers to use for pdftext.
+                                  Default is 1. (Applies to: TableProcessor,
+                                  DocumentProvider, PdfProvider, EpubProvider,
+                                  HTMLProvider, PowerPointProvider,
+                                  SpreadSheetProvider)
+  --OllamaService_timeout INTEGER
+                                  The timeout to use for the service. Default
+                                  is 30.
+  --OllamaService_max_retries INTEGER
+                                  The maximum number of retries to use for the
+                                  service. Default is 2.
+  --OllamaService_retry_wait_time INTEGER
+                                  The wait time between retries. Default is 3.
+  --OllamaService_max_output_tokens INTEGER
+                                  The maximum number of output tokens to
+                                  generate. Default is None.
+  --OllamaService_ollama_base_url TEXT
+                                  The base url to use for ollama. No trailing
+                                  slash. Default is http://localhost:11434.
+  --OllamaService_ollama_model TEXT
+                                  The model name to use for ollama. Default is
+                                  llama3.2-vision.
+
+
+--llm_service=marker.services.ollama.OllamaService --ollama_base_url http://192.168.50.30:11434 --OllamaService_timeout 60 --OllamaService_max_retries 10 --OllamaService_retry_wait_time 6 --OllamaService_max_output_tokens 12000 --model_max_lengths 4 16000 --ollama_model=hf.co/mlabonne/gemma-3-27b-it-abliterated-GGUF:Q8_0 
+
+  --LLMImageDescriptionProcessor_use_llm   --LLMTableProcessor_max_table_iteration
+
+uv run marker --llm_service=marker.services.ollama.OllamaService --ollama_base_url http://192.168.50.30:11434 --use_llm  --ollama_model=hf.co/mlabonne/gemma-3-27b-it-abliterated-GGUF:Q8_0 --PdfConverter_use_llm --OCRConverter_use_llm --LLMPageCorrectionProcessor_use_llm --disable_image_extraction --LLMSimpleBlockMetaProcessor_use_llm --LLMPageCorrectionProcessor_use_llm --ExtractionConverter_use_llm --PdfConverter_use_llm  --OCRConverter_use_llm    --LineMergeProcessor_use_llm --LLMComplexRegionProcessor_use_llm "c:\ebook"    
+
+
+uv run marker_single --llm_service=marker.services.ollama.OllamaService --ollama_base_url http://192.168.50.30:11434 --use_llm  --ollama_model=hf.co/mlabonne/gemma-3-27b-it-abliterated-GGUF:Q8_0 --PdfConverter_use_llm --OCRConverter_use_llm --LLMPageCorrectionProcessor_use_llm --disable_image_extraction "C:\ebook\_OceanofPDF.com_Managing_Microsoft_Teams__MS-700_Exam_Guid_-_Nate_Chamberlain.pdf" --LLMSimpleBlockMetaProcessor_use_llm --LLMPageCorrectionProcessor_use_llm --ExtractionConverter_use_llm --PdfConverter_use_llm  --OCRConverter_use_llm    --LineMergeProcessor_use_llm --LLMComplexRegionProcessor_use_llm --max_concurrency 1 --LLMImageDescriptionProcessor_max_concurrency 1 --model_max_length 16000 --max_output_tokens 10000 --disable_image_extraction
+
+
+v run marker_single --llm_service=marker.services.ollama.OllamaService --ollama_base_url http://192.168.50.30:11434 --use_llm  --ollama_model=gemma3:27b hf.co/mlabonne/gemma-3-27b-it-abliterated-GGUF:Q8_0 --PdfConverter_use_llm --OCRConverter_use_llm --LLMPageCorrectionProcessor_use_llm --disable_image_extraction --LLMImageDescriptionProcessor_max_concurrency 2 "C:\Users\Gebruiker\Downloads\_OceanofPDF.com_Exam_Ref_Ms-700_Managing_Microsoft_Teams_-_Ed_Fisher.pdf"        
+
+
+uv run marker_single --llm_service=marker.services.ollama.OllamaService --ollama_base_url http://192.168.50.30:11434 --use_llm  --ollama_model=hf.co/mlabonne/gemma-3-27b-it-abliterated-GGUF:Q8_0 --PdfConverter_use_llm --OCRConverter_use_llm --LLMPageCorrectionProcessor_use_llm --disable_image_extraction "C:\Users\Gebruiker\Downloads\_OceanofPDF.com_Exam_Ref_Ms-700_Managing_Microsoft_Teams_-_Ed_Fisher.pdf" --LLMSimpleBlockMetaProcessor_use_llm --LLMPageCorrectionProcessor_use_llm --ExtractionConverter_use_llm --PdfConverter_use_llm  --OCRConverter_use_llm    --LineMergeProcessor_use_llm --LLMComplexRegionProcessor_use_llm  "C:\ebook\_OceanofPDF.com_Managing_Microsoft_Teams__MS-700_Exam_Guid_-_Nate_Chamberlain.pdf"
+ {'type': 'object', 'properties': {'comparison': {'title': 'Comparison', 'type': 'string'}, 'corrected_html': {'title': 'Corrected Html', 'type': 'string'}, 'analysis': {'title': 'Analysis', 'type': 'string'}, 'score': {'title': 'Score', 'type': 'integer'}}, 'required': ['comparison', 'corrected_html', 'analysis', 'score']}, 'images': [
+
+C:\projecten\marker-snood>uv run marker_single --llm_service=marker.services.ollama.OllamaService --ollama_base_url http://192.168.50.30:11434 --use_llm  --ollama_model=hf.co/mlabonne/gemma3:12b --OCRConverter_use_llm --LLMPageCorrectionProcessor_use_llm --disable_image_extraction  --LLMSimpleBlockMetaProcessor_use_llm --LLMPageCorrectionProcessor_use_llm --ExtractionConverter_use_llm --LineMergeProcessor_use_llm --LLMComplexRegionProcessor_use_llm  "C:\ebook\_OceanofPDF.com_Managing_Microsoft_Teams__MS-700_Exam_Guid_-_Nate_Chamberlain.pdf"
+
+
+uv run marker_single --llm_service=marker.services.ollama.OllamaService --ollama_base_url http://192.168.50.30:11434 --OllamaService_timeout 60 --OllamaService_max_retries 10 --OllamaService_retry_wait_time 6 --OllamaService_max_output_tokens 8000 --model_max_length 14000 --ollama_model=mistral-small3.1:latest --use_llm --LLMImageDescriptionProcessor_use_llm  --disable_image_extraction  "C:\ebook\_OceanofPDF.com_Managing_Microsoft_Teams__MS-700_Exam_Guid_-_Nate_Chamberlain.pdf"   --TableConverter_use_llm   --LLMTableMergeProcessor_use_llm  --LLMPageCorrectionProcessor_use_llm --pdftext_workers 2  --LLMImageDescriptionProcessor_max_concurrency 2 --LLMTableProcessor_max_concurrency 2 --LLMTableProcessor_max_concurrency 4
+
+
+
+uv run marker_single --llm_service=marker.services.ollama.OllamaService --ollama_base_url http://192.168.50.30:11434 --OllamaService_timeout 60 --OllamaService_max_retries 10 --OllamaService_retry_wait_time 6 --OllamaService_max_output_tokens 8000 --model_max_length 14000 --ollama_model=mistral-small3.1:latest --use_llm --LLMImageDescriptionProcessor_use_llm  --disable_image_extraction  "C:\ebook\_OceanofPDF.com_Managing_Microsoft_Teams__MS-700_Exam_Guid_-_Nate_Chamberlain.pdf"   --TableConverter_use_llm   --LLMTableMergeProcessor_use_llm  --LLMPageCorrectionProcessor_use_llm --pdftext_workers 3  --LLMImageDescriptionProcessor_max_concurrency 3 --LLMTableProcessor_max_concurrency 3 --LLMTableProcessor_max_concurrency 3
+
+uv run marker --llm_service=marker.services.ollama.OllamaService --ollama_base_url http://192.168.50.30:11434 --OllamaService_timeout 60 --OllamaService_max_retries 7 --OllamaService_retry_wait_time 6 --OllamaService_max_output_tokens 9000 --model_max_length 12000 --ollama_model=gemma3:12b-it-qat  --use_llm --LLMImageDescriptionProcessor_use_llm  --disable_image_extraction --TableConverter_use_llm   --LLMTableMergeProcessor_use_llm  --LLMPageCorrectionProcessor_use_llm  --num_chunks 4 "C:\projecten\marker-snood\ebook_doen"
+

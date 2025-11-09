@@ -56,16 +56,20 @@ Some guidelines:
 - Replace any images in table cells with a description, like "Image: [description]".
 - Only use the tags th, td, tr, br, span, sup, sub, i, b, math, and table.  Only use the attributes display, style, colspan, and rowspan if necessary.  You can use br to break up text lines in cells.
 - Make sure the columns and rows match the image faithfully, and are easily readable and interpretable by a human.
+- remove completely empty rows or columns if present.
+- Redistribute text inside table cells over multiple lines using <br> tags, so that no line inside a cell exceeds 120 characters in length in the final markdown rendering. Break lines at logical points such as spaces or punctuation to avoid breaking words wherever possible.
 
 **Instructions:**
 1. Carefully examine the provided text block image.
 2. Analyze the html representation of the table.
 3. Write a comparison of the image and the html representation, paying special attention to the column headers matching the correct column values.
-4. If the html representation is completely correct, or you cannot read the image properly, then write "No corrections needed."  If the html representation has errors, generate the corrected html representation.  Output only either the corrected html representation or "No corrections needed."
+4. If the html representation is completely correct, or you cannot read the image properly, then write "No corrections needed."  If the html representation has errors, generate the corrected html representation.  Output only either the corrected html representation or "No corrections needed." Make sure to output using the exact markdown formatting as in the example below, including the triple backticks and "html".
 5. If you made corrections, analyze your corrections against the original image, and provide a score from 1-5, indicating how well the corrected html matches the image, with 5 being perfect.
+
 **Example:**
 Input:
-```html
+```
+
 <table>
     <tr>
         <th>First Name</th>
@@ -80,16 +84,21 @@ Input:
 ```
 Output:
 comparison: The image shows a table with 2 rows and 3 columns.  The text and formatting of the html table matches the image.  The column headers match the correct column values.
-```html
+```
+
 No corrections needed.
+
 ```
 analysis: I did not make any corrections, as the html representation was already accurate.
 score: 5
 **Input:**
-```html
+```
+
 {block_html}
+
 ```
 """
+
 
     def handle_image_rotation(self, children: List[TableCell], image: Image.Image):
         ratios = [c.polygon.width / c.polygon.height for c in children]
